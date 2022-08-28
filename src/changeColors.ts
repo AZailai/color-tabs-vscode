@@ -24,6 +24,7 @@ export default async (color?: string) => {
     titleBackground,
     activityBarBackground,
     statusBarBackground,
+    tabInactiveBackground,
   } = getSettings();
 
   const tabBarBorderColor = color;
@@ -56,6 +57,7 @@ export default async (color?: string) => {
     ...(statusBarBackground
       ? { "statusBar.foreground": statusBarForegroundColor }
       : {}),
+    ...(tabInactiveBackground ? { "tab.inactiveBackground": tabBarBorderColor } : {}),
   };
 
   const hasItems = Object.keys(colorCustomization).filter(

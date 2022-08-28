@@ -15,6 +15,7 @@ type AllSettings = {
     activityBarBackground?: boolean;
     statusBarBackground?: boolean;
     titleLabel?: boolean;
-}
+    tabInactiveBackground?: Boolean;
+};
 
 export default () => vscode.workspace.getConfiguration('colorTabs') as AllSettings;
