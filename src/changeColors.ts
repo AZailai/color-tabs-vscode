@@ -13,6 +13,14 @@ const invertHex = (hex?: string) => {
   return Number(hex.replace("#", "0x")) > 0xffffff / 2 ? "#000000" : "#ffffff";
 };
 
+const Lighter = (hex?: string) => {
+  if (!hex) {
+    return;
+  }
+
+  return hex + "20";
+};
+
 export default async (color?: string) => {
   const colorInverted = invertHex(color);
   const settings = vscode.workspace.getConfiguration("workbench");
@@ -26,6 +34,8 @@ export default async (color?: string) => {
     statusBarBackground,
     tabInactiveBackground,
   } = getSettings();
+
+  const colorLighter = Lighter(color)
 
   const tabBarBorderColor = color;
   const titleBarBackgroundColor = color;
@@ -57,7 +67,7 @@ export default async (color?: string) => {
     ...(statusBarBackground
       ? { "statusBar.foreground": statusBarForegroundColor }
       : {}),
-    ...(tabInactiveBackground ? { "tab.inactiveBackground": tabBarBorderColor } : {}),
+    ...(tabInactiveBackground ? { "tab.inactiveBackground": colorLighter } : {}),
   };
 
   const hasItems = Object.keys(colorCustomization).filter(
